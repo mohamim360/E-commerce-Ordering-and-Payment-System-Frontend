@@ -8,12 +8,33 @@ const api = axios.create({
 
 // Request interceptor to add token
 api.interceptors.request.use((config) => {
-  const token = localStorage.getItem('token');
-  if (token) {
-    config.headers.Authorization = `Bearer ${token}`;
+  if (typeof window !== 'undefined') {
+    const token = localStorage.getItem('token');
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
   }
   return config;
 });
+
+// Response interceptor for error handling
+api.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.response) {
+      // Server responded with error status
+      const message = error.response.data?.message || error.response.data?.error || 'An error occurred';
+      error.userMessage = message;
+    } else if (error.request) {
+      // Request was made but no response received
+      error.userMessage = 'Network error. Please check your connection.';
+    } else {
+      // Something else happened
+      error.userMessage = error.message || 'An unexpected error occurred';
+    }
+    return Promise.reject(error);
+  }
+);
 
 // Auth APIs
 export const authAPI = {
