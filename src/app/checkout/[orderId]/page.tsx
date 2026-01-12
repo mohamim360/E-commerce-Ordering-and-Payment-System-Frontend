@@ -13,6 +13,15 @@ import AuthGuard from '@/src/components/AuthGuard';
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!);
 
+/**
+ * Renders a Stripe payment form for the specified order and handles confirmation flow.
+ *
+ * Displays a Stripe PaymentElement and a submit button, disables submission while Stripe is unavailable or a payment is processing, shows an error toast when confirmation fails, and relies on Stripe to redirect to the configured return URL on success.
+ *
+ * @param orderId - The identifier of the order being paid
+ * @param clientSecret - The Stripe PaymentIntent client secret used to initialize Elements
+ * @returns The JSX element for the checkout payment form
+ */
 function CheckoutForm({ orderId, clientSecret }: { orderId: string; clientSecret: string }) {
   const stripe = useStripe();
   const elements = useElements();
@@ -60,6 +69,15 @@ function CheckoutForm({ orderId, clientSecret }: { orderId: string; clientSecret
   );
 }
 
+/**
+ * Renders the authenticated checkout page for a specific order, including order summary and Stripe payment flow.
+ *
+ * Displays a loading view while fetching the order, an "Order Not Found" view if the order or Stripe client secret is missing,
+ * and the main checkout UI (order items, total, and payment form) when data is available. Fetches order data on mount and
+ * initializes a Stripe payment session; surface errors are reported via toasts and navigation to the orders list on fetch failure.
+ *
+ * @returns The checkout page JSX wrapped with AuthGuard, showing either a loading state, a not-found view, or the full checkout layout with Stripe Elements and a CheckoutForm.
+ */
 export default function CheckoutPage() {
   const params = useParams();
   const router = useRouter();

@@ -7,6 +7,13 @@ import { useState } from 'react';
 import { useAuthStore, useCartStore } from '@/src/lib/store';
 import { orderAPI } from '@/src/lib/api';
 
+/**
+ * Renders the shopping cart page with item list, order summary, and checkout controls.
+ *
+ * Displays an empty-cart call-to-action when there are no items; otherwise shows cart items with quantity controls, per-item totals, removal actions, and an order summary with subtotal, shipping, and total. The checkout control validates authentication and cart contents, creates an order via the API, clears the cart on success, shows toast notifications for success or failure, and navigates to the checkout page for the created order.
+ *
+ * @returns The React element for the cart page UI.
+ */
 export default function CartPage() {
   const router = useRouter();
   const { items, removeItem, updateQuantity, clearCart, total } = useCartStore();

@@ -9,6 +9,13 @@ import { useAuthStore } from '@/src/lib/store';
 import { authAPI } from '@/src/lib/api';
 import { Mail, Lock, AlertCircle } from 'lucide-react';
 
+/**
+ * Render the login page and handle user authentication.
+ *
+ * The component redirects already-authenticated users to `/products`, manages local form, loading, and error state, and submits credentials to the authentication API. On successful login it updates the global auth store, shows a success toast, and navigates to `/products`. On failure it sets an inline error message and shows an error toast.
+ *
+ * @returns The login page React element.
+ */
 export default function LoginPage() {
   const router = useRouter();
   const { setAuth, user } = useAuthStore();

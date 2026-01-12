@@ -1,6 +1,11 @@
 import Link from 'next/link';
 import { ShoppingBag, TrendingUp, Shield, ArrowRight, Sparkles } from 'lucide-react';
 
+/**
+ * Render the ShopHub homepage layout including a gradient hero, feature cards, and a call-to-action section.
+ *
+ * @returns The JSX structure for the ShopHub homepage containing the hero (with CTAs), a three-card features grid, and a bottom CTA.
+ */
 export default function Home() {
   return (
     <div className="min-h-screen">

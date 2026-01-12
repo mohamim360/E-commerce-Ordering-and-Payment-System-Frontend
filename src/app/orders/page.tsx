@@ -9,6 +9,13 @@ import { Order } from '@/src/types';
 import { orderAPI } from '@/src/lib/api';
 import AuthGuard from '@/src/components/AuthGuard';
 
+/**
+ * Render the authenticated user's orders page with refreshable, collapsible order cards and appropriate empty and loading states.
+ *
+ * Displays a success toast and cleans the URL if the `payment=success` query parameter is present. Fetches and shows the user's orders, presenting each order as a card with a status badge, placed date, total, and an expandable detail panel listing items, subtotal, and total. Provides a Refresh button to re-fetch orders and shows an error toast if loading fails.
+ *
+ * @returns The Orders page UI as a React element.
+ */
 export default function OrdersPage() {
 	const router = useRouter();
 	const [orders, setOrders] = useState<Order[]>([]);

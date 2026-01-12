@@ -12,6 +12,16 @@ interface AuthGuardProps {
   requireAdmin?: boolean;
 }
 
+/**
+ * Guards its children behind optional authentication and admin-role checks.
+ *
+ * When `requireAuth` is false the children are rendered immediately. When `requireAuth` is true the component verifies the current session token, updates the central auth store, and enforces `requireAdmin` if specified.
+ *
+ * @param children - The subtree to render when access is granted
+ * @param requireAuth - If true, requires a valid authenticated session to render `children`
+ * @param requireAdmin - If true, requires the authenticated user to have role `"ADMIN"` to render `children`
+ * @returns The component's `children` when access is granted; `null` when access is denied; a centered loading indicator while the authorization check is in progress.
+ */
 export default function AuthGuard({ 
   children, 
   requireAuth = false, 
