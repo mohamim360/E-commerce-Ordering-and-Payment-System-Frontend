@@ -8,6 +8,11 @@ import { Product } from '@/src/types';
 import { productAPI } from '@/src/lib/api';
 import AuthGuard from '@/src/components/AuthGuard';
 
+/**
+ * Renders the admin products management page with product listing, creation, editing, and deletion via a modal form, including inline field validation and toast feedback.
+ *
+ * @returns The rendered admin products management UI.
+ */
 export default function AdminProductsPage() {
 	const [products, setProducts] = useState<Product[]>([]);
 	const [loading, setLoading] = useState(true);

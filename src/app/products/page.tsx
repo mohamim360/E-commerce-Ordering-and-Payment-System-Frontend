@@ -7,6 +7,14 @@ import { Product } from '@/src/types';
 import { useCartStore } from '@/src/lib/store';
 import { productAPI } from '@/src/lib/api';
 
+/**
+ * Render the products page UI with search, paginated listing, and add-to-cart actions.
+ *
+ * Fetches and displays products, shows loading skeletons during data fetch, filters client-side by the search input,
+ * handles pagination when no search is active, and provides add-to-cart feedback (including out-of-stock handling).
+ *
+ * @returns The React element for the products listing page.
+ */
 export default function ProductsPage() {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);

@@ -9,6 +9,15 @@ import { useAuthStore } from '@/src/lib/store';
 import { authAPI } from '@/src/lib/api';
 import { Mail, Lock, User, AlertCircle, X } from 'lucide-react';
 
+/**
+ * Render the registration page with a sign-up form, client-side validation state,
+ * per-field error display, and submission handling that registers a new user.
+ *
+ * The component redirects authenticated users to /products, calls the auth API on submit,
+ * updates authentication state on success, and displays success or error toasts.
+ *
+ * @returns The registration page React element, or `null` when a user is already authenticated.
+ */
 export default function RegisterPage() {
   const router = useRouter();
   const { setAuth, user } = useAuthStore();
